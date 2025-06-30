@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4">Klasifikasi Aspirasi</h2>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ aspirasi['judul'] }}</h5>
+            <p class="card-text">{{ aspirasi['isi'] }}</p>
+            <p class="card-text"><small class="text-muted">Kategori: {{ aspirasi['kategori'] | capitalize }} | Urgensi: {{ aspirasi['urgensi'] | capitalize }} | Status: {{ aspirasi['status'] | capitalize }}</small></p>
+        </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('klasifikasi_aspirasi', id=aspirasi['_id']) }}">
+        <div class="mb-3">
+            <label for="klasifikasi" class="form-label">Klasifikasi</label>
+            <select name="klasifikasi" id="klasifikasi" class="form-control">
+                <option value="fasilitas" {% if aspirasi['klasifikasi'] == 'fasilitas' %}selected{% endif %}>Fasilitas</option>
+                <option value="kegiatan" {% if aspirasi['klasifikasi'] == 'kegiatan' %}selected{% endif %}>Kegiatan</option>
+                <option value="kebijakan" {% if aspirasi['klasifikasi'] == 'kebijakan' %}selected{% endif %}>Kebijakan</option>
+                <option value="lain-lain" {% if aspirasi['klasifikasi'] == 'lain-lain' %}selected{% endif %}>Lain-lain</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="prioritas" class="form-label">Prioritas</label>
+            <select name="prioritas" id="prioritas" class="form-control">
+                <option value="tinggi" {% if aspirasi['prioritas'] == 'tinggi' %}selected{% endif %}>Tinggi</option>
+                <option value="sedang" {% if aspirasi['prioritas'] == 'sedang' %}selected{% endif %}>Sedang</option>
+                <option value="rendah" {% if aspirasi['prioritas'] == 'rendah' %}selected{% endif %}>Rendah</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-info">Simpan Klasifikasi</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary ms-2">Batal</a>
+    </form>
+</div>
+{% endblock %}

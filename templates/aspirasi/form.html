@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h2>Kirim Aspirasi</h2>
+    <form method="POST">
+        <input type="text" name="judul" class="form-control mb-3" placeholder="Judul Aspirasi">
+        <textarea name="isi" class="form-control mb-3" placeholder="Isi Aspirasi"></textarea>
+        <select name="kategori" class="form-control mb-3">
+            <option value="fasilitas">Fasilitas</option>
+            <option value="kegiatan">Kegiatan</option>
+            <option value="kebijakan">Kebijakan</option>
+        </select>
+        <select name="urgensi" class="form-control mb-3">
+            <option value="tinggi">Tinggi</option>
+            <option value="sedang">Sedang</option>
+            <option value="rendah">Rendah</option>
+        </select>
+        <button type="submit" class="btn btn-warning">Kirim</button>
+    </form>
+</div>
+{% endblock %}

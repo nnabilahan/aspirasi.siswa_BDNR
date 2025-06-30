@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h2>Dashboard OSIS</h2>
+    {% for asp in aspirasi %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5>{{ asp['judul'] }}</h5>
+            <p>{{ asp['isi'] }}</p>
+            <form method="POST" action="{{ url_for('klasifikasi_aspirasi', id=asp['_id']) }}">
+                <select name="prioritas" class="form-control mb-2">
+                    <option value="tinggi">Prioritas Tinggi</option>
+                    <option value="sedang">Sedang</option>
+                    <option value="rendah">Rendah</option>
+                </select>
+                <button type="submit" class="btn btn-info">Klasifikasi</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

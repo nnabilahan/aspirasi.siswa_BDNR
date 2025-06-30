@@ -1,0 +1,40 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+a {
+    text-decoration: none;
+}
+
+.navbar-custom {
+    background: rgba(30, 58, 138, 0.95);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.navbar-custom.scrolled {
+    background: rgba(30, 58, 138, 1);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+footer {
+    background: #1e293b;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.alert {
+    border-radius: 8px;
+}

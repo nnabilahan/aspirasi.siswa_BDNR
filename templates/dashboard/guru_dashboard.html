@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h2>Dashboard Guru Pembina</h2>
+    {% for asp in aspirasi %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5>{{ asp['judul'] }}</h5>
+            <p>{{ asp['isi'] }}</p>
+            <form method="POST" action="{{ url_for('tanggapi_aspirasi', id=asp['_id']) }}">
+                <textarea name="tanggapan" class="form-control mb-2" placeholder="Tanggapan..."></textarea>
+                <button type="submit" class="btn btn-success">Tanggapi</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

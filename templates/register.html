@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="card shadow-lg p-4" style="max-width: 500px; width: 100%;">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">Daftar Akun (Khusus OSIS / Guru)</h2>
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Masukkan Username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password (Ini tidak akan diverifikasi untuk hardcoded akun)" required>
+                    <small class="form-text text-muted">Untuk akun OSIS dan Guru, password akan diverifikasi langsung di kode program.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="role" class="form-label">Daftar Sebagai</label>
+                    <select name="role" id="role" class="form-select" required>
+                        <option value="">-- Pilih Peran --</option>
+                        <option value="osis">OSIS</option>
+                        <option value="guru">Guru Pembina</option>
+                    </select>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-plus me-2"></i> Daftar
+                    </button>
+                </div>
+            </form>
+            <p class="text-center mt-3">Sudah punya akun? <a href="{{ url_for('login') }}">Masuk di sini</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

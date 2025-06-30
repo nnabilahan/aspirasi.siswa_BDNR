@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="card shadow-lg p-4" style="max-width: 500px; width: 100%;">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">Masuk ke Akun Anda</h2>
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="role" class="form-label">Pilih Peran</label>
+                    <select name="role" id="role" class="form-select" onchange="updateLoginForm()">
+                        <option value="siswa">Siswa</option>
+                        <option value="osis">OSIS</option>
+                        <option value="guru">Guru Pembina</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="identifier" class="form-label" id="identifierLabel">NISN</label>
+                    <input type="text" name="identifier" id="identifier" class="form-control" placeholder="Masukkan NISN Anda" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label" id="passwordLabel">Nama (Untuk Siswa)</label>
+                    <input type="text" name="password" id="password" class="form-control" placeholder="Masukkan Nama Lengkap Anda" required>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="fas fa-sign-in-alt me-2"></i> Login
+                    </button>
+                </div>
+            </form>
+            <p class="text-center mt-3">Belum punya akun? (Khusus OSIS/Guru) <a href="{{ url_for('register') }}">Daftar di sini</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateLoginForm() {
+        const role = document.getElementById('role').value;
+        const identifierLabel = document.getElementById('identifierLabel');
+        const identifierInput = document.getElementById('identifier');
+        const passwordLabel = document.getElementById('passwordLabel');
+        const passwordInput = document.getElementById('password');
+
+        if (role === 'siswa') {
+            identifierLabel.textContent = 'NISN';
+            identifierInput.placeholder = 'Masukkan NISN Anda';
+            passwordLabel.textContent = 'Nama Lengkap';
+            passwordInput.placeholder = 'Masukkan Nama Lengkap Anda';
+            passwordInput.type = 'text'; // Pastikan tipe input adalah text untuk nama
+            passwordInput.setAttribute('required', 'true'); // Nama wajib diisi
+        } else {
+            identifierLabel.textContent = 'Username';
+            identifierInput.placeholder = 'Masukkan Username Anda';
+            passwordLabel.textContent = 'Password';
+            passwordInput.placeholder = 'Masukkan Password Anda';
+            passwordInput.type = 'password'; // Kembalikan tipe input ke password
+            passwordInput.setAttribute('required', 'true');
+        }
+    }
+
+    // Panggil saat halaman pertama kali dimuat untuk mengatur tampilan awal
+    document.addEventListener('DOMContentLoaded', updateLoginForm);
+</script>
+{% endblock %}

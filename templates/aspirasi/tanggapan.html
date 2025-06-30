@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4">Dashboard Guru Pembina</h2>
+    <h3 class="mb-3">Aspirasi yang Perlu Ditanggapi</h3>
+
+    {% if aspirasi %}
+        <div class="row">
+            {% for asp in aspirasi %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">{{ asp['judul'] }}</h5>
+                        <p class="card-text text-muted">{{ asp['isi'] }}</p>
+                        <hr>
+                        <p class="card-text mb-1">
+                            <small class="text-secondary">
+                                <strong>Kategori:</strong> {{ asp['kategori'] | capitalize }}
+                            </small>
+                        </p>
+                        <p class="card-text mb-1">
+                            <small class="text-secondary">
+                                <strong>Urgensi:</strong> {{ asp['urgensi'] | capitalize }}
+                            </small>
+                        </p>
+                        <p class="card-text mb-1">
+                            <small class="text-secondary">
+                                <strong>Status:</strong> <span class="fw-bold
+                                {% if asp['status'] == 'Dikirim' %}text-warning
+                                {% elif asp['status'] == 'Diproses' %}text-info
+                                {% elif asp['status'] == 'Selesai' %}text-success
+                                {% endif %}">{{ asp['status'] | capitalize }}</span>
+                            </small>
+                        </p>
+                        {% if asp['tanggal_kirim'] %}
+                            <p class="card-text mb-1">
+                                <small class="text-secondary">
+                                    <strong>Dikirim:</strong> {{ asp['tanggal_kirim'].strftime('%d %B %Y') }}
+                                </small>
+                            </p>
+                        {% endif %}
+                        {% if asp['klasifikasi'] %}
+                            <p class="card-text mt-2"><small class="text-info"><strong>Klasifikasi:</strong> {{ asp['klasifikasi'] | capitalize }}</small></p>
+                        {% endif %}
+                        {% if asp['prioritas'] %}
+                            <p class="card-text"><small class="text-info"><strong>Prioritas:</strong> {{ asp['prioritas'] | capitalize }}</small></p>
+                        {% endif %}
+                        
+                        {# Link untuk menanggapi aspirasi #}
+                        {% if asp['status'] in ['Dikirim', 'Diproses'] %}
+                        <a href="{{ url_for('tanggapi_aspirasi', id=asp['_id']) }}" class="btn btn-success btn-sm mt-3">
+                            <i class="fas fa-reply me-1"></i> Tanggapi Aspirasi
+                        </a>
+                        {% elif asp['tanggapan'] %}
+                            <div class="alert alert-success mt-3 py-2 px-3 border-0 rounded-3">
+                                <strong>Tanggapan:</strong> {{ asp['tanggapan'] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Tidak ada aspirasi yang perlu ditanggapi saat ini.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
